@@ -1,4 +1,4 @@
-api_key = "sk-proj-Zz7DTPRlqAizft33ZCZFT3BlbkFJfcKP5IisSzLdC0uTH17E" # Your ChatGPT API Key
+api_key = "sk-proj-1guzJL6gGVe3L0ORzJV3T3BlbkFJ74d24GUbawXHkROCP22e" # Your ChatGPT API Key
 path = "data/"
 prompt = """
 You run in a loop of Thought, Action, PAUSE, Observation.
@@ -55,7 +55,7 @@ If the IR lacks the details, please generate the most relevant code and patch, a
 The detail of IR: \"Title of IR\": \"{}\"; \"Body of IR\": \"{}\".
 Note that, the \"Title of IR\" may not correspond to the \"Body of IR\",
 so title can only be used as reference, and you should mainly focus on the body.
-The format of your response should be as follows:
+The format of your response should be the JSON format, and the format of output is as follows:
 * Generation 1: \"Vulnerable Code\": The generated vulnerable code; \"Patch\": The generated patch for the code.
 * Generation 2: \"Vulnerable Code\": The generated vulnerable code; \"Patch\": The generated patch for the code.
 ...
@@ -63,8 +63,7 @@ The format of your response should be as follows:
 """
 
 content_sec_issue_analysis = """
-Please detect whether this following issue report has the security issues, which need to be disclosed in CVE.
-The detail of IR: \"Title of IR\": \"{}\"; \"Body of IR\": \"{}\".
-The format of your response should be as follows:
-Yes/No, a short description of this IR, and why it relates/not-relates to security.
+Please identify whether this following issue report has the security issues, which need to be disclosed in CVE.
+The detail of IR: \"Title of IR\": {}; \"Body of IR\": {}.
+The format of your response should be the json format, and the components are as follows: \"Identification Result\": Yes or No, \"CWE-ID\": the predicted CWE-ID, \"Description\": A short description of why it relates/not-relates to security
 """
