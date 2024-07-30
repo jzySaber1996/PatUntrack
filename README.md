@@ -6,7 +6,8 @@ Reports without Tracked Insecure Code (ASE'24)
 ## Prompts for Insecure Code\&Patch Generation
 
 In this section, we illustrate the initial prompt for all the subtasks in the PatUntrack.
-### Pre-defined Prompt for Extracting the VTP Description $P_{extract}$
+
+### P_extract: Pre-defined Prompt for Extracting the VTP Description
 
 
 > We define the structure of the VTP description for triggering the vulnerabilities, which
@@ -23,7 +24,7 @@ error types have different Focus (f) on extracting VTP description.
 Body incorporates the content of the vulnerability. Please generate the VTP description
 based on the previous definition.
 
-### Pre-defined Prompt for Completing the VTP Description $P_{complete}$
+### P_complete: Pre-defined Prompt for Completing the VTP Description
 
 
 > We define the structure of the VTP description for triggering the vulnerabilities, which
