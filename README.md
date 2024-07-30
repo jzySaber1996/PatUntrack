@@ -14,10 +14,10 @@ is a graph with operations and transitions:
 > 
 > * The definition of operations and transitions in the VTP description.
 > 
-> Please note that each $Vul\_Type$ has a CWE type and error type. Different CWE and
+> Please note that each Vul_Type has a CWE type and error type. Different CWE and
 error types have different Focus ($f$) on extracting VTP description.
 > * The definition of CWE and error types.
-> * Focus List: $\{<Vul\_Type_1,f_1>,...,<Vul\_Type_n,f_n>\}$
+> * Focus List: <Vul_Type$_1$,f$_1$>,...,<Vul_Type$_n$,f$_n$>
 > 
 > The input IR is {Title, Body}, where Title is the summarization of vulnerability, and
 Body incorporates the content of the vulnerability. Please generate the VTP description
@@ -31,10 +31,10 @@ is a graph with operations and transitions:
 > 
 > * The definition of operations and transitions in the VTP description.
 > 
-> Please note that each $Vul\_Type$ has a CWE type and error type. Different CWE and
+> Please note that each Vul_Type has a CWE type and error type. Different CWE and
 error types have different Focus ($f$) on extracting VTP description.
 > * The definition of CWE and error types.
-> * Focus List: $\{<Vul\_Type_1,f_1>,...,<Vul\_Type_n,f_n>\}$
+> * Focus List: <Vul_Type$_1$,f$_1$>,...,<Vul_Type$_n$,f$_n$>
 > 
 > The input VTP description is {JSON-formatted VTP Description}. 
 > Please determine whether this VTP description is complete based on the previous definition.
