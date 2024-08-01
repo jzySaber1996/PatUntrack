@@ -180,3 +180,21 @@ error types have different Focus (f) on extracting VTP description.
 > 
 > Based on the predicted vulnerability type {CWE and Vul_Type}, 
 > you can refer to the Focus List to retrieve the f_i for help.
+
+
+## Auto-Prompting
+
+In the auto-prompting step, we conduct 20 iterations to tune the Focus List in these prompts.
+The prompt analyze the examples by adding, modifying, and deleting the original prompts.
+
+> We will auto-prompt the Focus List in the prompt {Inputted Prompt} with the sample {Inputted Item}.
+> 
+> The three methods for auto-prompting are Inserting, Modifying, and Deleting, which are defined as follows:
+> * Inserting: You can insert this sample to the prompt's focus list. The inserted information is how this sample will affect the {Task}.
+> * Modifying: The sample is already used in the prompt, and you can modify the content of focus based on the new analysis.
+> * Deleting: You can delete this sample from the focus list, which might be redundant.
+> 
+> Based on the previous three prompts, please re-conduct the prediction with the three new prompts.
+
+Note that, the score function F_s(x,y) is conducted in the source code, and we choose the best prompt after the auto-prompting.
+If all the scores are below 0 (i.e., F_s(x,y)<0), we will choose the original prompt as the updated prompt.
