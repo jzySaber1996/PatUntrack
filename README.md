@@ -3,7 +3,7 @@
 This is the repository for PatUntrack: Automated Generating Patch Examples for Issue
 Reports without Tracked Insecure Code (ASE'24)
 
-## Abstract
+## 1. Abstract
 
 Security patches are essential for enhancing the stability and robustness of projects in the open-source software community. 
 While vulnerabilities are officially expected to be patched before being disclosed, patching vulnerabilities is complicated and remains a struggle for many organizations. 
@@ -14,12 +14,12 @@ In this paper, we propose PatUntrack, an automated approach to generating patch 
 To evaluate the performance of PatUntrack, we conducted experiments on 5,465 vulnerable IRs. The experimental results show that PatUntrack can obtain the highest performance and improve the traditional LLM baselines by +17.7% (MatchFix) and +14.6% (Fix@10) on average in patch example generation. 
 Our human evaluation indicates that developers can benefit from these examples for patching the vulnerabilities.
 
-## Prompts of PatUntrack
+## 2. Prompts of PatUntrack
 The prompts in the PatUntrack control the generation of insecure code and patch examples from the IRs.
 Note that, the focus list is the essential information, and we will maintain a directory in the [prompt/focus_list](./prompt/focus_list) that store all the information in the focuses of prompt.
 All the tasks will refer to the focus list to enhance their performances.
 
-### Prompts for Generating Complete VTP Description
+### 2.1 Prompts for Generating Complete VTP Description
 
 In this section, we illustrate the initial prompt for generating VTP descriptions in the PatUntrack.
 
@@ -65,7 +65,7 @@ error types have different Focus (f) on extracting VTP description.
 > Based on the predicted vulnerability type {CWE and Vul_Type}, 
 > you can refer to the Focus List to retrieve the f_i for help.
 
-### Prompts for Correcting Hallucinatory VTP Description
+### 2.2 Prompts for Correcting Hallucinatory VTP Description
 
 In this section, we illustrate the initial prompt for correcting hallucinatory VTP descriptions in the PatUntrack.
 The control of the traversing is in the algorithm. 
@@ -132,7 +132,7 @@ error types have different Focus (f) on extracting VTP description.
 > Based on the predicted vulnerability type {CWE and Vul_Type}, 
 > you can refer to the Focus List to retrieve the f_i for help.
 
-### Prompts for Generating Insecure Code & Patch Example
+### 2.3 Prompts for Generating Insecure Code & Patch Example
 
 In this section, we illustrate the initial prompt for generating insecure code & patch examples.
 
@@ -182,7 +182,7 @@ error types have different Focus (f) on extracting VTP description.
 > you can refer to the Focus List to retrieve the f_i for help.
 
 
-## Auto-Prompting
+## 3. Auto-Prompting
 
 In the auto-prompting step, we conduct 20 iterations to tune the Focus List in these prompts.
 The prompt analyze the examples by adding, modifying, and deleting the original prompts.
@@ -198,3 +198,46 @@ The prompt analyze the examples by adding, modifying, and deleting the original 
 
 Note that, the score function F_s(x,y) is conducted in the source code, and we choose the best prompt after the auto-prompting.
 If all the scores are below 0 (i.e., F_s(x,y)<0), we will choose the original prompt as the updated prompt.
+
+## 4. Setup Instructions
+
+The following instructions can help you utilize the artifacts:
+
+### 4.1 Prompts and Dataset
+
+We have open-sourced the Prompts, Focus-Lists, and Datasets for the PatUntrack, and you can directly generate the insecure code\&patch examples with them. Note that, the dataset is too large, and you have to download the dataset in the external links in [data/README.md](data/README.md).
+
+
+### 4.2 Necessary Python Versions and Packages
+
+This artifact requires the Python with Version>3.8, so you need to update your Python version if it is less than 3.8. We recommend you create a new environment for the _Python 3.8_ because there might be compatibility issues between different versions.
+Moreover, you need to know how to install the Python Packages with:
+
+`pip install package-name==package-version`
+
+If you use Anaconda to deploy your Python projects, you can utilize the following command to install the corresponding packages.
+
+`conda install package-name==package-version`
+
+Some other packages are _numpy_, _openai_, _torch_, and _transformers_, etc., and we have listed the packages in the \texttt{requirements.txt}.
+You can install the packages with:
+
+`pip install -r requirements.txt`
+
+### 4.3 Setup of OpenAI API-Key and Fine-Tuning
+
+After downloading the artifact on your own PC, you can execute the generation of insecure code\&patch examples with the following command:
+
+`python code_patch_pipeline.py`
+
+* **Setup of OpenAI:** Since PatUntrack is conducted on the LLM, e.g., GPT-3 and ChatGPT, you need to call the OpenAI APIs to enable the usage of such LLM. We have not removed our original _API-Key_ in the file [Config.py](./Config.py) to ensure that the artifact can be executed normally. However, this key might not be permanent, so we recommend you apply for your own keys through the [OpenAI Platform](https://platform.openai.com/account/api-keys) and replace it in the Config.py. 
+* **Setup of PyTorch:** Since PatUntrack is also conducted on CodeT5, you also need to ensure that your system contains the basic packages for fine-tuning, e.g., _PyTorch_ and _Transformer_. These packages are incorporated in the [requirements.txt](./requirements.txt), and you can directly install them. We utilize Tsinghua's _OpenPrompt_ library to train the T5 model and the configuration is listed in the file [t5Config.py](./t5Config.py). You need to download the model in the link within [data/README.md](data/README.md), then use this model to generate the insecure code\&patch examples.
+
+
+### 4.4 Setup for Auto-Prompting
+
+In the directory [prompt/focus\_list](prompt/focus_list), we have listed all the Focus-Lists after the auto-prompting, and you can directly utilize them to generate insecure code\&patch examples.
+If you want to know how the auto-prompting is conducted, you can execute the Python file with the following command. 
+This file indicates how the PatUntrack is optimized from VTP generation to the patch example generation.
+
+`python auto-prompting.py`
